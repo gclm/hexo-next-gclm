@@ -1,0 +1,22 @@
+#hexo robots.txt
+User-agent: *
+Allow: /
+Allow: /archives/
+
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+# Sitemap: https://blog.gclmit.club/search.xml
+
+# Sitemap: https://blog.gclmit.club/sitemap.xml
+# Sitemap: https://blog.gclmit.club/baidusitemap.xml
+
+Sitemap: https://你自己的网址/search.xml
+
+Sitemap: https://你自己的网址/sitemap.xml
+Sitemap: https://你自己的网址/baidusitemap.xml
+

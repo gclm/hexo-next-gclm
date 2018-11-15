@@ -1,0 +1,42 @@
+
+language: node_js # 设置语言
+node_js:
+   - 8.12.0 # 设置相应版本
+
+cache:
+  directories:
+    - node_modules # 缓存不经常更改的内容
+
+install:
+  - npm install # 安装hexo及插件
+  - npm rebuild node-sass --force #该命令是根据构建失败的日志提示添加的
+  
+before_script:
+  - export TZ='Asia/Shanghai' # 更改时区
+  - npm install hexo-cli -g  # 安装hexo环境
+  
+script:
+  - hexo clean
+  - hexo generate
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name "gclm"
+  - git config user.email "1719982754@qq.com"
+  - git add .
+  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+  - git push --force --quiet "https://gclm:${CO_TOKEN}@${CO_REF}" master:master
+  # if it isn't a user/org page, please replace it with <master:gh-pages>
+  
+branches:
+  only:
+     - hexo # 只监测hexo分支
+
+env:
+ global:
+    # Github Pages 
+    - GH_REF: github.com/gclm/gclm.github.io.git
+    # Coding Pages 
+    - CO_REF: git.dev.tencent.com/gclm/gclm.git
